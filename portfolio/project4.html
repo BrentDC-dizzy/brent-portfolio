@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project 4 - Brent's Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .project-media {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .media-slide {
+      display: none;
+      width: 100%;
+    }
+
+    .media-slide.active {
+      display: block;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #ffffffcc;
+      border: 2px solid #8ac78c;
+      color: #4b8a4d;
+      font-size: 2rem;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .arrow.left {
+      left: -20px;
+    }
+
+    .arrow.right {
+      right: -20px;
+    }
+
+    .arrow:hover {
+      background-color: #eaffea;
+      transform: translateY(-50%) scale(1.1);
+      color: #2e7031;
+    }
+
+    .dot-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #bbb;
+      margin: 0 4px;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: #4b8a4d;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div><strong>Brent's Portfolio</strong></div>
+    <a href="index.html">← Back to Home</a>
+  </nav>
+
+  <div class="container">
+    <h1>Project 4: Knight's Tour Puzzle Solver</h1>
+
+    <div class="project-media">
+      <!-- 1 video and 5 screenshots -->
+      <div class="media-slide active">
+        <video controls src="assets/project4-vid1.mp4" type="video/mp4" width="100%"></video>
+      </div>
+      <div class="media-slide"><img src="assets/project4-ss1.png" alt="Screenshot 1" /></div>
+      <div class="media-slide"><img src="assets/project4-ss2.png" alt="Screenshot 2" /></div>
+      <div class="media-slide"><img src="assets/project4-ss3.png" alt="Screenshot 3" /></div>
+      <div class="media-slide"><img src="assets/project4-ss4.png" alt="Screenshot 4" /></div>
+      <div class="media-slide"><img src="assets/project4-ss5.png" alt="Screenshot 5" /></div>
+
+      <!-- Navigation arrows -->
+      <button class="arrow left" onclick="prevSlide()">🦉</button>
+      <button class="arrow right" onclick="nextSlide()">🍃</button>
+
+      <!-- Dots -->
+      <div class="dot-container">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+
+    <p>
+      This Knight's Tour puzzle solver supports both Warnsdorff’s heuristic and recursive backtracking methods to find valid knight paths on an 8x3 board. Users select a starting square and algorithm via a Python terminal interface. 
+      Results are saved to both CSV and JSON, the latter of which feeds into this interactive web visualizer. 
+      The solver counts move order and runtime and highlights dead ends if a solution is not found.
+    </p>
+
+    <a href="index.html" class="back-button">← Back to Home</a>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.media-slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+        dots[i].classList.toggle('active', i === index);
+      });
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }
+
+    function prevSlide() {
+      const prev = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(prev);
+    }
+  </script>
+</body>
+</html>

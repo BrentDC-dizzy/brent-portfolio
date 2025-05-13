@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project 3 - Brent's Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .project-media {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .media-slide {
+      display: none;
+      width: 100%;
+    }
+
+    .media-slide.active {
+      display: block;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #ffffffcc;
+      border: 2px solid #8ac78c;
+      color: #4b8a4d;
+      font-size: 2rem;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .arrow.left {
+      left: -20px;
+    }
+
+    .arrow.right {
+      right: -20px;
+    }
+
+    .arrow:hover {
+      background-color: #eaffea;
+      transform: translateY(-50%) scale(1.1);
+      color: #2e7031;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div><strong>Brent's Portfolio</strong></div>
+    <a href="index.html">← Back to Home</a>
+  </nav>
+
+  <div class="container">
+    <h1>Project 3: ROM-Based Phone Sorter</h1>
+
+    <div class="project-media">
+      <!-- 7 screenshots -->
+      <div class="media-slide active"><img src="assets/project3-ss1.png" alt="Screenshot 1" /></div>
+      <div class="media-slide"><img src="assets/project3-ss2.png" alt="Screenshot 2" /></div>
+      <div class="media-slide"><img src="assets/project3-ss3.png" alt="Screenshot 3" /></div>
+      <div class="media-slide"><img src="assets/project3-ss4.png" alt="Screenshot 4" /></div>
+      <div class="media-slide"><img src="assets/project3-ss5.png" alt="Screenshot 5" /></div>
+      <div class="media-slide"><img src="assets/project3-ss6.png" alt="Screenshot 6" /></div>
+      <div class="media-slide"><img src="assets/project3-ss7.png" alt="Screenshot 7" /></div>
+
+      <!-- Navigation arrows -->
+      <button class="arrow left" onclick="prevSlide()">🦉</button>
+      <button class="arrow right" onclick="nextSlide()">🍃</button>
+
+      <!-- Dots -->
+      <div class="dot-container">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+
+    <p>
+      This tool sorts a dataset of mobile phones based on ROM size using the QuickSort algorithm. ROM sizes are converted
+      into megabytes to normalize various units like GB, MB, KB, and non-numeric values like "UpTo" or "Expandable."
+      Secondary sorting by attributes such as rating, price, or RAM is also supported. Sorting is interactive and outputs a CSV.
+    </p>
+
+    <a href="index.html" class="back-button">← Back to Home</a>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.media-slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+        dots[i].classList.toggle('active', i === index);
+      });
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }
+
+    function prevSlide() {
+      const prev = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(prev);
+    }
+  </script>
+</body>
+</html>

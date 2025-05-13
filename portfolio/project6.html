@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project 6 - Brent's Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .project-media {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .media-slide {
+      display: none;
+      width: 100%;
+    }
+
+    .media-slide video {
+      width: 100%;
+      border: 2px solid #8ac78c;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .media-slide.active {
+      display: block;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #ffffffcc;
+      border: 2px solid #8ac78c;
+      color: #4b8a4d;
+      font-size: 2rem;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .arrow.left {
+      left: -20px;
+    }
+
+    .arrow.right {
+      right: -20px;
+    }
+
+    .arrow:hover {
+      background-color: #eaffea;
+      transform: translateY(-50%) scale(1.1);
+      color: #2e7031;
+    }
+
+    .dot-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #bbb;
+      margin: 0 4px;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: #4b8a4d;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div><strong>Brent's Portfolio</strong></div>
+    <a href="index.html">← Back to Home</a>
+  </nav>
+
+  <div class="container">
+    <h1>Project 6: Quicksort-Only LLM (Locally Hosted LLaMA 3.3 70B)</h1>
+
+    <div class="project-media">
+      <div class="media-slide active">
+        <video controls>
+          <source src="assets/project6-vid1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="media-slide">
+        <video controls>
+          <source src="assets/project6-vid2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- Navigation arrows -->
+      <button class="arrow left" onclick="prevSlide()">🦉</button>
+      <button class="arrow right" onclick="nextSlide()">🍃</button>
+
+      <!-- Dots -->
+      <div class="dot-container">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+
+    <p>
+      This project features a locally hosted instance of <strong>LLaMA 3.3 70B Instruct Turbo</strong>, fine-tuned to answer <strong>only</strong> questions related to the Quick Sort algorithm. Any off-topic questions are gracefully rejected with a custom refusal response.<br /><br />
+      Built using <strong>Flask</strong> for the backend and a responsive frontend using <strong>HTML, CSS, and JavaScript</strong>, the app includes a dynamic sidebar for managing chat history. Users can create new chats, delete old ones, and switch between light and dark themes seamlessly.<br /><br />
+      Chat sessions are saved locally using <strong>localStorage</strong>, ensuring conversations persist across sessions. This project demonstrates prompt engineering, model safety enforcement, and an intuitive UI tailored for algorithm education.
+    </p>
+
+    <a href="index.html" class="back-button">← Back to Home</a>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.media-slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+        dots[i].classList.toggle('active', i === index);
+      });
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }
+
+    function prevSlide() {
+      const prev = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(prev);
+    }
+  </script>
+</body>
+</html>
